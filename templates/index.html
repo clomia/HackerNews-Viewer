@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet">
+	</link>
+	<title>엄청나고 굉장해</title>
+	<style>
+		body {
+			background: rgba(0, 32, 63, 1);
+			background: -webkit-linear-gradient(top, rgba(0, 32, 63, 1) 0%, rgba(0, 10, 20, 1) 100%);
+			background: linear-gradient(to bottom, rgba(0, 32, 63, 1) 0%, rgba(0, 10, 20, 1) 100%);
+			color: white;
+			padding: 10%;
+			padding-top: 0px;
+		}
+
+		a:visited {
+			color: white;
+		}
+
+		a:link {
+			color: rgba(127, 219, 255, 1);
+			color: -webkit-linear-gradient(top, rgba(127, 219, 255, 1) 0%, rgba(82, 140, 163, 1) 100%);
+			color: linear-gradient(to bottom, rgba(127, 219, 255, 1) 0%, rgba(82, 140, 163, 1) 100%);
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: rgba(127, 219, 255, 1);
+			text-decoration: none;
+		}
+
+		.title {
+			color: white;
+		}
+
+		.title:link {
+			color: white;
+		}
+
+		a {
+			margin-left: 0;
+		}
+
+		.no-border {
+			border-bottom: none;
+		}
+
+		.comments {
+			font-weight: none;
+		}
+
+		div {
+			border-bottom: 1px solid white;
+			padding-bottom: 30px;
+		}
+
+		.none-align {
+			display: flex;
+			align-items: start;
+			justify-content: start;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>뉴스 해커 | News</h1>
+		<h4>정렬 | order by___ :&nbsp&nbsp&nbsp&nbsp--
+			<a href="/?order_by=popular">인기순 | Popular&nbsp</a>
+        OR  
+			<a href="/?order_by=new">&nbsp최신순 | New </a>
+      <div class="no-border">
+        <a href="/?order_by=refresh">데이터베이스 초기화 후 정보 갱신 | Information Refresh </a>
+      </div>
+		</h4>
+    <div class="no-border">
+      기록된 포스팅 시각은 유럽 표준시 기준입니다(UTC/GMT +01:00)
+    </div>
+    <div class="no-border">
+      사회 이슈에 대한 반응을 수집합니다
+    </div>
+    <div class-"no-border">
+      {% if USED_DB == 'no' %}
+      <div class="no-border">_____캐시 데이터베이스를 생성하고 수집한 정보를 저장하였습니다._____</div>
+      <div class="no-border">_____Saved the collected information in Fake DB._____</div>
+      {% else %}
+      <div class="no-border">_____캐시 데이터베이스에서 정보를 불러왔습니다._____</div>
+      <div class="no-border">_____The information was retrieved from the Fake DB._____</div>
+      {% endif %}
+    </div>
+	</header>
+
+	{%for dic in BIGLIST%}
+  <div>
+	<h1>
+		<a href={{dic.ID}} target="_blank">{{dic.TITLE|safe}}</a>
+	</h1>
+	<div class="no-border">{{dic.POINT}} points | By: {{dic.AUTHER}} | 
+    <a href={{dic.ID}} class="comments" target="_blank" >
+      {{dic.comments}}comments
+    </a>
+    &nbsp--{{dic.created_at}}--
+  </div>
+	<a href="{{dic.URL}}" target="_blank">해당 기사로 이동 | Go to the article</a>
+  </div>
+	{%endfor%}
+
+</body>
+
+</html>

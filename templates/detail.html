@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet">
+	</link>
+  {% if USED_DB == 'no' %}
+	<title>모든Reply 추적...</title>
+  {% else %}
+  <title>캐시 데이터베이스를 사용합니다</title>
+  {% endif %}
+	<style>
+		body {
+			background: rgba(0, 32, 63, 1);
+			background: -webkit-linear-gradient(top, rgba(0, 32, 63, 1) 0%, rgba(0, 10, 20, 1) 100%);
+			background: linear-gradient(to bottom, rgba(0, 32, 63, 1) 0%, rgba(0, 10, 20, 1) 100%);
+			color: white;
+			padding: 10%;
+			padding-top: 0px;
+		}
+
+		a:visited {
+			color: white;
+		}
+
+		a:link {
+			color: rgba(127, 219, 255, 1);
+			color: -webkit-linear-gradient(top, rgba(127, 219, 255, 1) 0%, rgba(82, 140, 163, 1) 100%);
+			color: linear-gradient(to bottom, rgba(127, 219, 255, 1) 0%, rgba(82, 140, 163, 1) 100%);
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: rgba(127, 219, 255, 1);
+			color: -webkit-linear-gradient(top, rgba(127, 219, 255, 1) 0%, rgba(82, 140, 163, 1) 100%);
+			color: linear-gradient(to bottom, rgba(127, 219, 255, 1) 0%, rgba(82, 140, 163, 1) 100%);
+			text-decoration: none;
+		}
+
+		.title {
+			color: white;
+		}
+
+		.title:link {
+			color: white;
+		}
+
+		a {
+			margin-left: 0;
+		}
+
+    div {
+       border-bottom: 1px solid white;
+    }
+    .no-border{
+      border-bottom: none;
+    }
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>
+			{{title|safe}}
+		</h1>
+		<div class="no-border">
+			{{points}} points | By: {{author}}
+			<a href="{{link}}" target="_blank">해당 기사로 이동 | Go to the article</a>
+		</div>
+    <div class="no-border">
+      {% if USED_DB == 'no' %}
+      <div class="no-border">_____캐시 데이터베이스를 생성하고 수집한 정보를 저장하였습니다.&nbsp&nbsp키 = {{ID}}_____</div>
+      <div class="no-border">정보량에 따라서 모든 정보를 가공하기까지 시간이 소요됩니다</div>
+      <div class="no-border">_____Saved the collected information in Fake DB.&nbsp&nbspKEY = {{ID}}_____</div>
+      {% else %}
+      <div class="no-border">_____캐시 데이터베이스에서 정보를 불러왔습니다.&nbsp&nbsp사용한 키 = {{ID}}_____</div>
+      <div class="no-border">정보량에 따라서 모든 정보를 가공하기까지 시간이 소요됩니다</div>
+      <div class="no-border">_____The information was retrieved from the Fake DB.&nbsp&nbsp from_KEY = {{ID}}_____</div>
+      {% endif %}
+    </div>
+    <div>
+      <h1>대댓글을 포함한 모든 댓글 수 | Number of All Comments: {{comments_count}}</h1>
+    </div>
+    </>
+	</header>
+		{%for text in textlist%}
+		<div>{{text|safe}}</div>
+		{%endfor%}
+</body>
+
+</html>
